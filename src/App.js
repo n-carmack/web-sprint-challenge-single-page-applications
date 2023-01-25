@@ -29,8 +29,11 @@ const formStartingErrors = {
 
 const App = () => {
 
+  
   const [formValues, setFormValues] = useState(formStartingValues);
   const [formErrors, setFormErrors] = useState(formStartingErrors);
+  const [orderData, setOrderData] = useState([])
+
   const handleChange = (name, value) => {
     validate(name, value);
     setFormValues({...formValues, [name]: value});
@@ -38,6 +41,7 @@ const App = () => {
   const handleSubmit = () => {
     axios.post('https://reqres.in/api/orders', formValues)
     .then(res=> {
+      setOrderData([res.data, ...orderData]);
       console.log(formValues)
     })
     .catch(err=> console.error(err));
