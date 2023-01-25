@@ -1,26 +1,36 @@
 import React, {useState} from "react";
 import axios from 'axios';
 
-import { Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import {Route, Router} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 import Form from "./Components/pizzaform";
+import * as yup from 'yup';
+import schema from "./Validation/formSchema";
+import HomePage from "./Components/homepage";
 
 const formStartingValues = {
-  username: '',
+  name: '',
   size: '',
-  instructions: '',
-  toppings1: false,
-  toppings2: false,
-  toppings3: false,
-  toppings4: false
+  special: '',
+  topping1: false,
+  topping2: false,
+  topping3: false,
+  topping4: false
+}
+
+const formStartingErrors = {
+  name: '',
+  size: '',
 }
 
 const App = () => {
 
   const [formValues, setFormValues] = useState(formStartingValues);
+  const [formErrors, setFormErrors] = useState(formStartingErrors);
   const handleChange = (name, value) => {
-    //* validate(name, value);
+    validate(name, value);
     setFormValues({...formValues, [name]: value});
   }
   const handleSubmit = () => {
@@ -31,18 +41,28 @@ const App = () => {
     .catch(err=> console.error(err));
   }
 
+  const validate = (name, value) => {
+    yup.reach(schema, name)
+    .validate(value)
+    .then(() => setFormErrors({...formErrors, [name]: ''}))
+    .catch(err=> setFormErrors({...formErrors, [name]: err.errors[0]}))
+}
+
   return (
-    <>
-      <h1>Bloomtech Eats</h1>
-      <p>You can remove this code and create your own header</p>
-      <Route exact path ="/">
-      <Link id="order=pizza" to={`/pizza`}></Link>
+    <div>
+      <Route exact path='/'>
+        <HomePage />
       </Route>
       <Route path="/pizza">
-        <Form values={formValues} change={handleChange} submit={handleSubmit}/>
+      <Form values={formValues} change={handleChange} errors={formErrors} submit={handleSubmit}/>
       </Route>
-      
-    </>
+    </div>
+    //<Route exact path ="/">
+    //<Link id="order=pizza" to={`/pizza`}></Link>
+    //</Route>
+    //<Route path="/pizza">
+    //<Form values={formValues} change={handleChange} errors={formErrors} submit={handleSubmit}/>
+    //</Route>
   );
 };
 export default App;

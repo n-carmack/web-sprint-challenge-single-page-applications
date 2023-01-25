@@ -3,26 +3,29 @@ import React from "react";
 const Form = (props) => {
 
     const {change, submitForm, errors} = props;
-    const {username, instructions, size, Topping1, Topping2, Topping3, Topping4} = props.values;
-    const onSubmit = (e) => {
-        e.preventDefault();
-        submitForm();
-    }
+    const {name, special, size, topping1, topping2, topping3, topping4} = props.values;
+
     const onChange = (e) => {
         const {name, value, checked, type} = e.target;
         const newVal = type === 'checkbox' ? checked : value;
         change(name, newVal);
     }
+    const onSubmit = (e) => {
+        e.preventDefault();
+        submitForm();
+    }
 
     return (
-        <form onSubmit={onSubmit} id='#pizza-form'>
+        <form onSubmit={submitForm} id='pizza-form'>
+            <p>{errors.name}</p>
+            <p>{errors.size}</p>
             <label>Name
                 <input
                     type="text"
                     id="name-input"
                     placeholder="Enter your name here"
-                    value={username}
-                    name="username"
+                    value={name}
+                    name="name"
                     onChange={onChange}
                     />
             </label>
@@ -39,32 +42,32 @@ const Form = (props) => {
             <label>Pepperoni
                 <input
                     type="checkbox"
-                    name="Topping1"
-                    checked={Topping1}
+                    name="topping1"
+                    checked={topping1}
                     onChange={onChange}
                     />
             </label>
             <label>Spinach
                 <input
                     type="checkbox"
-                    name="Topping2"
-                    checked={Topping2}
+                    name="topping2"
+                    checked={topping2}
                     onChange={onChange}
                     />
             </label>
             <label>Extra Cheese
                 <input
                     type="checkbox"
-                    name="Topping3"
-                    checked={Topping3}
+                    name="topping3"
+                    checked={topping3}
                     onChange={onChange}
                     />
             </label>
             <label>Mushrooms
                 <input
                     type="checkbox"
-                    name="Topping4"
-                    checked={Topping4}
+                    name="tpping4"
+                    checked={topping4}
                     onChange={onChange}
                     />
             </label>
@@ -73,8 +76,8 @@ const Form = (props) => {
                     type="text"
                     id="special-text"
                     placeholder="Special Instructions"
-                    value={instructions}
-                    name="instructions"
+                    value={special}
+                    name="special"
                     onChange={onChange}
                     />
             </label>
