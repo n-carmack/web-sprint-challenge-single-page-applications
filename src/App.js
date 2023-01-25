@@ -23,18 +23,25 @@ const App = () => {
     //* validate(name, value);
     setFormValues({...formValues, [name]: value});
   }
+  const handleSubmit = () => {
+    axios.post('https://reqres.in/api/orders', formValues)
+    .then(res=> {
+      console.log(formValues)
+    })
+    .catch(err=> console.error(err));
+  }
 
   return (
     <>
       <h1>Bloomtech Eats</h1>
       <p>You can remove this code and create your own header</p>
-      
       <Route exact path ="/">
       <Link id="order=pizza" to={`/pizza`}></Link>
       </Route>
       <Route path="/pizza">
-        <Form />
+        <Form values={formValues} change={handleChange} submit={handleSubmit}/>
       </Route>
+      
     </>
   );
 };

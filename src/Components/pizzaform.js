@@ -19,7 +19,7 @@ const Form = (props) => {
             <label>Name
                 <input
                     type="text"
-                    id="#name-input"
+                    id="name-input"
                     placeholder="Enter your name here"
                     value={username}
                     name="username"
@@ -29,7 +29,7 @@ const Form = (props) => {
             <label>Size
                 <input
                     type="text"
-                    id="#size-dropdown"
+                    id="size-dropdown"
                     placeholder="Enter your name here"
                     value={size}
                     name="size"
@@ -71,7 +71,7 @@ const Form = (props) => {
             <label>Special Instructions
                 <input
                     type="text"
-                    id="#special-text"
+                    id="special-text"
                     placeholder="Special Instructions"
                     value={instructions}
                     name="instructions"
