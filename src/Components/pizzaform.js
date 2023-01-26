@@ -5,7 +5,7 @@ const Form = (props) => {
 
     
     const {change, submitForm, errors} = props;
-    const {name, special, size, topping1, topping2, topping3, topping4} = props.values;
+    const {name, size, topping1, topping2, topping3, topping4, special} = props.values;
 
     const onChange = (e) => {
         const {name, value, checked, type} = e.target;
@@ -92,6 +92,7 @@ const Form = (props) => {
                     onChange={onChange}
                     />
             </label>
+            
             <input type="submit" value="Add to Order" id="order-button"/>
         </form>
         
