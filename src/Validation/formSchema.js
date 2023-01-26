@@ -9,6 +9,16 @@ const formSchema = yup.object().shape({
     size: yup
         .string()
         .required('A size is required.'),
+    special:yup
+        .string(),
+    topping1:yup
+        .boolean(),
+    topping2:yup
+        .boolean(),
+    topping3:yup
+        .boolean(),
+    topping4:yup
+        .boolean(),
 })
 
 export default formSchema;

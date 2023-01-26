@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 const Form = (props) => {
 
+    
     const {change, submitForm, errors} = props;
     const {name, special, size, topping1, topping2, topping3, topping4} = props.values;
 
@@ -14,6 +15,7 @@ const Form = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
         submitForm();
+        
     }
 
 
@@ -33,14 +35,20 @@ const Form = (props) => {
                     />
             </label>
             <label>Size
-                <input
-                    type="text"
-                    id="size-dropdown"
-                    placeholder="Enter your name here"
+                    <select
+                        value={size}
+                        id="size-dropdown"
+                    placeholder="Choose a size"
                     value={size}
                     name="size"
-                    onChange={onChange}
-                    />
+                    onChange={onChange}>
+                        <option name="small">Small</option>
+                        <option name="medium">Medium</option>
+                        <option name="large">Large</option>
+                    </select>
+            </label>
+            <label>
+                
             </label>
             <label>Pepperoni
                 <input

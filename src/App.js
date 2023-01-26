@@ -15,11 +15,11 @@ import { useHistory } from 'react-router-dom';
 const formStartingValues = {
   name: '',
   size: '',
-  special: '',
   topping1: false,
   topping2: false,
   topping3: false,
-  topping4: false
+  topping4: false,
+  special: '',
 }
 
 const formStartingErrors = {
@@ -41,8 +41,9 @@ const App = () => {
   const handleSubmit = () => {
     axios.post('https://reqres.in/api/orders', formValues)
     .then(res=> {
-      setOrderData([res.data, ...orderData]);
       console.log(formValues)
+      setOrderData([formValues, ...orderData]);
+      
     })
     .catch(err=> console.error(err));
   }
